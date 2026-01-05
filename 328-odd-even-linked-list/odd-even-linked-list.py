@@ -7,28 +7,16 @@ class Solution:
     def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next:
             return head
-        array=[]
-        temp=head
+        odd = head
+        even=head.next
+        evenHead=head.next
 
-        while temp and temp.next:
-            array.append(temp.val)
-            temp=temp.next.next
-        if temp:
-            array.append(temp.val)
+        while even and even.next:
+            odd.next=odd.next.next
+            even.next=even.next.next
 
-        temp=head.next
-        
-        while temp and temp.next:
-            array.append(temp.val)
-            temp=temp.next.next
-        if temp:
-            array.append(temp.val)
-        
-        #reset temp
-        temp=head
-        i=0
-        while temp:
-            temp.val=array[i]
-            temp=temp.next
-            i+=1
-        return head    
+            odd=odd.next
+            even=even.next
+
+        odd.next=evenHead
+        return head
